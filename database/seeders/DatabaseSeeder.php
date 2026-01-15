@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed dog breeds (templates + random)
+        $this->call(\Database\Seeders\DogBreedSeeder::class);
     }
 }
