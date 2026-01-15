@@ -22,4 +22,9 @@ it('shows a single breed', function () {
         ->assertJsonFragment(['id' => $breed->id]);
 });
 
+it('returns json structure for items', function () {
+    DogBreed::factory()->create();
 
+    $this->getJson('/api/dog-breeds')
+        ->assertJsonStructure([['id','name','origin_country','height_cm','weight_kg','recognized_since']]);
+});
