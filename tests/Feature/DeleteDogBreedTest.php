@@ -22,4 +22,11 @@ it('after delete the resource cannot be retrieved', function () {
     $this->getJson('/api/dog-breeds/' . $breed->id)->assertNotFound();
 });
 
+it('reduces total count after delete', function () {
+    DogBreed::factory()->count(2)->create();
+    $breed = DogBreed::first();
 
+    $this->deleteJson('/api/dog-breeds/' . $breed->id)->assertNoContent();
+
+    expect(DogBreed::count())->toBe(1);
+});
