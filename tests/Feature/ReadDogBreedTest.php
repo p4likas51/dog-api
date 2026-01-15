@@ -14,4 +14,12 @@ it('returns empty array if no breeds', function () {
     $this->getJson('/api/dog-breeds')->assertOk()->assertJson([]);
 });
 
+it('shows a single breed', function () {
+    $breed = DogBreed::factory()->create();
+
+    $this->getJson('/api/dog-breeds/' . $breed->id)
+        ->assertOk()
+        ->assertJsonFragment(['id' => $breed->id]);
+});
+
 
