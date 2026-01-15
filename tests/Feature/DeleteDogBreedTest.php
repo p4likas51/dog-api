@@ -14,4 +14,12 @@ it('returns 404 when deleting missing breed', function () {
     $this->deleteJson('/api/dog-breeds/99999')->assertNotFound();
 });
 
+it('after delete the resource cannot be retrieved', function () {
+    $breed = DogBreed::factory()->create();
+
+    $this->deleteJson('/api/dog-breeds/' . $breed->id)->assertNoContent();
+
+    $this->getJson('/api/dog-breeds/' . $breed->id)->assertNotFound();
+});
+
 
