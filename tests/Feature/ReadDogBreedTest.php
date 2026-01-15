@@ -10,3 +10,8 @@ it('lists dog breeds', function () {
         ->assertJsonCount(3);
 });
 
+it('returns empty array if no breeds', function () {
+    $this->getJson('/api/dog-breeds')->assertOk()->assertJson([]);
+});
+
+
